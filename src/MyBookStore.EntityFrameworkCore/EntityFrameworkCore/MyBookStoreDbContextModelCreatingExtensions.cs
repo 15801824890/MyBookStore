@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MyBookStore.Books;
 using Volo.Abp;
+using Volo.Abp.EntityFrameworkCore.Modeling;
 
 namespace MyBookStore.EntityFrameworkCore
 {
@@ -17,6 +19,14 @@ namespace MyBookStore.EntityFrameworkCore
             //    b.ConfigureByConvention(); //auto configure for the base class props
             //    //...
             //});
+
+            builder.Entity<Book>(b =>
+            {
+                b.ToTable(MyBookStoreConsts.DbTablePrefix + "Books",
+                    MyBookStoreConsts.DbSchema);
+                b.ConfigureByConvention(); //auto configure for the base class props
+                b.Property(x => x.Name).IsRequired().HasMaxLength(128);
+            });
         }
     }
 }

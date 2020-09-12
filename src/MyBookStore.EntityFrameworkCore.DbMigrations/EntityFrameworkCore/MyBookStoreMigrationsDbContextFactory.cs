@@ -15,9 +15,11 @@ namespace MyBookStore.EntityFrameworkCore
 
             var configuration = BuildConfiguration();
 
-            var builder = new DbContextOptionsBuilder<MyBookStoreMigrationsDbContext>()
-                .UseSqlServer(configuration.GetConnectionString("Default"));
+            // var builder = new DbContextOptionsBuilder<MyBookStoreMigrationsDbContext>()
+            //     .UseSqlServer(configuration.GetConnectionString("Default"));
 
+            var builder = new DbContextOptionsBuilder<MyBookStoreMigrationsDbContext>()
+                .UseMySql(configuration.GetConnectionString("Default"));
             return new MyBookStoreMigrationsDbContext(builder.Options);
         }
 

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MyBookStore.Books;
 using MyBookStore.Users;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
@@ -25,6 +26,7 @@ namespace MyBookStore.EntityFrameworkCore
         /* Add DbSet properties for your Aggregate Roots / Entities here.
          * Also map them inside MyBookStoreDbContextModelCreatingExtensions.ConfigureMyBookStore
          */
+        public DbSet<Book> Books { get; set; }
 
         public MyBookStoreDbContext(DbContextOptions<MyBookStoreDbContext> options)
             : base(options)

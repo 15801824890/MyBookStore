@@ -29,6 +29,19 @@ namespace MyBookStore.Web.Menus
             var l = context.GetLocalizer<MyBookStoreResource>();
 
             context.Menu.Items.Insert(0, new ApplicationMenuItem(MyBookStoreMenus.Home, l["Menu:Home"], "~/"));
+            context.Menu.AddItem(
+                new ApplicationMenuItem(
+                    "BooksStore",
+                    l["Menu:BookStore"],
+                    icon: "fa fa-book"
+                ).AddItem(
+                    new ApplicationMenuItem(
+                        "BooksStore.Books",
+                        l["Menu:Books"],
+                        url: "/Books"
+                    )
+                )
+            );
         }
     }
 }

@@ -7,6 +7,9 @@ using Volo.Abp.Domain.Repositories;
 
 namespace MyBookStore.Books
 {
+    /// <summary>
+    /// BookAppService使用IObjectMapper将Book对象转换为BookDto对象, 将CreateUpdateBookDto对象转换为Book对象
+    /// </summary>
     public class BookAppService :
         CrudAppService<
             Book, //The Book entity

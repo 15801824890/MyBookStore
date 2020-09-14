@@ -20,6 +20,7 @@ namespace MyBookStore.EntityFrameworkCore
             //    //...
             //});
 
+            //ConfigureByConvention() 方法优雅的配置/映射继承的属性,应始终对你所有的实体使用它.
             builder.Entity<Book>(b =>
             {
                 b.ToTable(MyBookStoreConsts.DbTablePrefix + "Books",

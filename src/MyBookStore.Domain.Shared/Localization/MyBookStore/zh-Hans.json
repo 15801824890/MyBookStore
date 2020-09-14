@@ -1,5 +1,5 @@
 {
-    "culture": "zh-Hans",
+  "culture": "zh-Hans",
   "texts": {
     "Menu:Home": "首页",
     "Welcome": "欢迎",
@@ -11,21 +11,28 @@
     "Delete": "删除",
     "Edit": "编辑",
     "PublishDate": "出版日期",
-    "NewBook": "New book",
+    "NewBook": "添加",
     "Name": "名字",
     "Type": "类型",
     "Price": "价格",
     "CreationTime": "创建日期",
     "AreYouSure": "确定?",
     "AreYouSureToDelete": "Are you sure you want to delete this item?",
-    "Enum:BookType:0": "Undefined",
-    "Enum:BookType:1": "Adventure",
-    "Enum:BookType:2": "Biography",
+    "Enum:BookType:0": "未定义",
+    "Enum:BookType:1": "冒险",
+    "Enum:BookType:2": "传记",
     "Enum:BookType:3": "Dystopia",
     "Enum:BookType:4": "Fantastic",
-    "Enum:BookType:5": "Horror",
-    "Enum:BookType:6": "Science",
+    "Enum:BookType:5": "恐怖",
+    "Enum:BookType:6": "科学",
     "Enum:BookType:7": "Science fiction",
-    "Enum:BookType:8": "Poetry"
+    "Enum:BookType:8": "Poetry",
+    "BookDeletionConfirmationMessage": "确定删除书籍'{0}'?",
+    "SuccessfullyDeleted": "删除成功!",
+    "Permission:BookStore": "Book Store",
+    "Permission:Books": "Book Management",
+    "Permission:Books.Create": "添加书籍",
+    "Permission:Books.Edit": "编辑书籍",
+    "Permission:Books.Delete": "删除书籍"
   }
-  }
+}

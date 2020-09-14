@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MyBookStore.Books;
 
 namespace MyBookStore.Web
 {
@@ -7,6 +8,7 @@ namespace MyBookStore.Web
         public MyBookStoreWebAutoMapperProfile()
         {
             //Define your AutoMapper configuration here for the Web project.
+            CreateMap<BookDto, CreateUpdateBookDto>();
         }
     }
 }

@@ -19,6 +19,11 @@ namespace MyBookStore
             _bookRepository = bookRepository;
         }
 
+        /// <summary>
+        /// 如果数据库中当前没有图书,则此代码使用 IRepository默认为repository将两本书插入数据库.
+        /// </summary>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public async Task SeedAsync(DataSeedContext context)
         {
             if (await _bookRepository.GetCountAsync() <= 0)

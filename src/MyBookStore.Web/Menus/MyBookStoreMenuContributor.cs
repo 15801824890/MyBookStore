@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using MyBookStore.Localization;
 using MyBookStore.MultiTenancy;
+using MyBookStore.Permissions;
 using Volo.Abp.TenantManagement.Web.Navigation;
 using Volo.Abp.UI.Navigation;
 
@@ -29,16 +30,47 @@ namespace MyBookStore.Web.Menus
             var l = context.GetLocalizer<MyBookStoreResource>();
 
             context.Menu.Items.Insert(0, new ApplicationMenuItem(MyBookStoreMenus.Home, l["Menu:Home"], "~/"));
+            // context.Menu.AddItem(
+            //     new ApplicationMenuItem(
+            //         "BooksStore",
+            //         l["Menu:BookStore"],
+            //         icon: "fa fa-book"
+            //     ).AddItem(
+            //         new ApplicationMenuItem(
+            //             "BooksStore.Books",
+            //             l["Menu:Books"],
+            //             url: "/Books"
+            //         )
+            //     )
+            // );
+
+            var bookStoreMenu = new ApplicationMenuItem(
+                "BooksStore",
+                l["Menu:BookStore"],
+                icon: "fa fa-book"
+            );
+
+            context.Menu.AddItem(bookStoreMenu);
+
+            //CHECK the PERMISSION
+            if (await context.IsGrantedAsync(MyBookStorePermissions.Books.Default))
+            {
+                bookStoreMenu.AddItem(new ApplicationMenuItem(
+                    "BooksStore.Books",
+                    l["Menu:Books"],
+                    url: "/Books"
+                ));
+            }
+
             context.Menu.AddItem(
                 new ApplicationMenuItem(
-                    "BooksStore",
-                    l["Menu:BookStore"],
-                    icon: "fa fa-book"
+                    "JobSchedule",
+                    l["Menu:JobSchedule"]
                 ).AddItem(
                     new ApplicationMenuItem(
-                        "BooksStore.Books",
-                        l["Menu:Books"],
-                        url: "/Books"
+                        "JobSchedule.JobInfo",
+                        l["Menu:JobInfo"],
+                        url: "/JobSchedule"
                     )
                 )
             );

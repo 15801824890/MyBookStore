@@ -6,12 +6,15 @@
     "LongWelcomeMessage": "欢迎来到该应用程序. 这是一个基于ABP框架的启动项目. 有关更多信息, 请访问 abp.io.",
     "Menu:BookStore": "书店",
     "Menu:Books": "列表",
+    "Menu:JobSchedule": "任务调度",
+    "Menu:JobInfo": "任务",
+
     "Actions": "操作",
     "Close": "关闭",
     "Delete": "删除",
     "Edit": "编辑",
     "PublishDate": "出版日期",
-    "NewBook": "添加",
+    "NewBook": "添加书籍",
     "Name": "名字",
     "Type": "类型",
     "Price": "价格",
@@ -30,9 +33,25 @@
     "BookDeletionConfirmationMessage": "确定删除书籍'{0}'?",
     "SuccessfullyDeleted": "删除成功!",
     "Permission:BookStore": "Book Store",
-    "Permission:Books": "Book Management",
+    "Permission:Books": "书籍管理",
     "Permission:Books.Create": "添加书籍",
     "Permission:Books.Edit": "编辑书籍",
-    "Permission:Books.Delete": "删除书籍"
+    "Permission:Books.Delete": "删除书籍",
+
+    "Permission:Authors": "作者管理",
+    "Permission:Authors.Create": "添加新作者",
+    "Permission:Authors.Edit": "编辑作者",
+    "Permission:Authors.Delete": "删除作者",
+
+    "JobSchedule:JobInfo": "JobSchedule",
+    "JobSchedule:JobGroup": "工作组",
+    "JobSchedule:JobName": "任务名称",
+    "JobSchedule:JobDescription": "任务描述",
+    "JobSchedule:JobStatus": "任务状态",
+    "JobSchedule:CronExpress": "Cron表达式",
+    "JobSchedule:StarTime": "开始时间",
+    "JobSchedule:EndTime": "结束时间",
+    "JobSchedule:NextTime": "下次执行时间",
+    "NewJobInfo": "创建任务"
   }
 }

@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using MyBookStore.Authors;
 using MyBookStore.Books;
+using MyBookStore.JobSchedule;
 
 namespace MyBookStore
 {
@@ -12,6 +14,11 @@ namespace MyBookStore
              * into multiple profile classes for a better organization. */
             CreateMap<Book, BookDto>();
             CreateMap<CreateUpdateBookDto, Book>();
+
+            CreateMap<Author, AuthorDto>();
+
+            CreateMap<JobInfo, JobInfoDto>();
+            CreateMap<CreateUpdateJobInfoDto, JobInfo>();
         }
     }
 }

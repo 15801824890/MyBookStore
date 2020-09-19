@@ -6,29 +6,28 @@
 @model MyBookStore.Web.Pages.Books.IndexModel
 @inject IStringLocalizer<MyBookStoreResource> L
 @inject IAuthorizationService AuthorizationService
-@section scripts
-{
-    <abp-script src="/Pages/Books/Index.js" />
+
+@section scripts{
+    <abp-script src="/Pages/JobSchedule/index.js"/>
 }
 
 <abp-card>
     <abp-card-header>
         <abp-row>
             <abp-column size-md="_6">
-                <abp-card-title>@L["Books"]</abp-card-title>
+                <h2>@L["JobSchedule:JobInfo"]</h2>
             </abp-column>
             <abp-column size-md="_6" class="text-right">
-                @if (await AuthorizationService.IsGrantedAsync(MyBookStorePermissions.Books.Create))
-                {
-                    <abp-button id="NewBookButton"
-                                text="@L["NewBook"].Value"
-                                icon="plus"
-                                button-type="Primary" />
-                }
+                <abp-button id="NewJobInfoButton"
+                            text="@L["NewJobInfo"].Value"
+                            icon="plus"
+                            button-type="Primary">
+                </abp-button>
             </abp-column>
         </abp-row>
     </abp-card-header>
     <abp-card-body>
-        <abp-table striped-rows="true" id="BooksTable"></abp-table>
+        <abp-table striped-rows="true" id="JobInfoTable">
+        </abp-table>
     </abp-card-body>
 </abp-card>

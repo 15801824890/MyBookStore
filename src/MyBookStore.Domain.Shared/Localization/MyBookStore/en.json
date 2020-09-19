@@ -6,6 +6,9 @@
     "LongWelcomeMessage": "Welcome to the application. This is a startup project based on the ABP framework. For more information, visit abp.io.",
     "Menu:BookStore": "Book Store",
     "Menu:Books": "Books",
+    "Menu:JobSchedule": "JobSchedule",
+    "Menu:JobInfo": "Job",
+
     "Actions": "Actions",
     "Close": "Close",
     "Delete": "Delete",
@@ -33,6 +36,27 @@
     "Permission:Books": "Book Management",
     "Permission:Books.Create": "Creating new books",
     "Permission:Books.Edit": "Editing the books",
-    "Permission:Books.Delete": "Deleting the books"
+    "Permission:Books.Delete": "Deleting the books",
+    "BookStore:00001": "There is already an author with the same name: {name}",
+
+    "Permission:Authors": "Author Management",
+    "Permission:Authors.Create": "Creating new authors",
+    "Permission:Authors.Edit": "Editing the authors",
+    "Permission:Authors.Delete": "Deleting the authors",
+
+    "JobSchedule:JobInfo": "JobSchedule",
+    "JobSchedule:JobGroup": "Group",
+    "JobSchedule:JobName": "Name",
+    "JobSchedule:JobDescription": "Description",
+    "Enum:JobStatus:0": "Running",
+    "Enum:JobStatus:1": "Completed",
+    "Enum:JobStatus:2": "Stopped",
+    "Enum:JobStatus:3": "SystemStopped",
+    "Enum:JobStatus:4": "Deleted",
+    "JobSchedule:CronExpress": "CronExpress",
+    "JobSchedule:StarTime": "StarTime",
+    "JobSchedule:EndTime": "EndTime",
+    "JobSchedule:NextTime": "NextTime",
+    "NewJobInfo": "New JobInfo"
   }
 }

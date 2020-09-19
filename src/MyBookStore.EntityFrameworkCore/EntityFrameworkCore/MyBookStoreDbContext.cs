@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MyBookStore.Authors;
 using MyBookStore.Books;
+using MyBookStore.JobSchedule;
 using MyBookStore.Users;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
@@ -27,6 +29,8 @@ namespace MyBookStore.EntityFrameworkCore
          * Also map them inside MyBookStoreDbContextModelCreatingExtensions.ConfigureMyBookStore
          */
         public DbSet<Book> Books { get; set; }
+        public DbSet<Author> Authors { get; set; }
+        public DbSet<JobInfo> JobInfos { get; set; }
 
         public MyBookStoreDbContext(DbContextOptions<MyBookStoreDbContext> options)
             : base(options)

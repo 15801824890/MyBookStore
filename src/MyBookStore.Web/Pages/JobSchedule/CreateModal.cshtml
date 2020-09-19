@@ -1,0 +1,19 @@
+﻿@page
+@using Microsoft.Extensions.Localization
+@using MyBookStore.Localization
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
+@model MyBookStore.Web.Pages.JobSchedule.CreateModalModel
+@inject IStringLocalizer<MyBookStoreResource> L
+@{
+    Layout = null;
+}
+
+<abp-dynamic-form abp-model="JobInfo" asp-page="/JobSchedule/CreateModal">
+    <abp-modal>
+        <abp-modal-header title="@L["NewJobSchedule"].Value"></abp-modal-header>
+        <abp-modal-body>
+            <abp-form-content />
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</abp-dynamic-form>

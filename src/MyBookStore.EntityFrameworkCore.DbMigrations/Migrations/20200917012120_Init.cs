@@ -1,9 +1,10 @@
 ﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace MyBookStore.Migrations
 {
-    public partial class Created_Book_Entity : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -258,6 +259,29 @@ namespace MyBookStore.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "AppAuthors",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(nullable: false),
+                    ExtraProperties = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(nullable: false),
+                    CreatorId = table.Column<Guid>(nullable: true),
+                    LastModificationTime = table.Column<DateTime>(nullable: true),
+                    LastModifierId = table.Column<Guid>(nullable: true),
+                    IsDeleted = table.Column<bool>(nullable: false, defaultValue: false),
+                    DeleterId = table.Column<Guid>(nullable: true),
+                    DeletionTime = table.Column<DateTime>(nullable: true),
+                    Name = table.Column<string>(maxLength: 64, nullable: false),
+                    BirthDate = table.Column<DateTime>(nullable: false),
+                    ShortBio = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppAuthors", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AppBooks",
                 columns: table => new
                 {
@@ -276,6 +300,35 @@ namespace MyBookStore.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AppBooks", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "AppJobInfos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    ExtraProperties = table.Column<string>(nullable: true),
+                    ConcurrencyStamp = table.Column<string>(maxLength: 40, nullable: true),
+                    CreationTime = table.Column<DateTime>(nullable: false),
+                    CreatorId = table.Column<Guid>(nullable: true),
+                    LastModificationTime = table.Column<DateTime>(nullable: true),
+                    LastModifierId = table.Column<Guid>(nullable: true),
+                    JobGroup = table.Column<string>(maxLength: 128, nullable: false),
+                    JobDescription = table.Column<string>(maxLength: 64, nullable: false),
+                    JobName = table.Column<string>(maxLength: 64, nullable: false),
+                    JobAssemblyName = table.Column<string>(maxLength: 256, nullable: false),
+                    JobNamespace = table.Column<string>(maxLength: 256, nullable: false),
+                    JobClassName = table.Column<string>(maxLength: 128, nullable: false),
+                    JobStatus = table.Column<byte>(nullable: false),
+                    CronExpress = table.Column<string>(maxLength: 64, nullable: false),
+                    StarTime = table.Column<DateTime>(nullable: false),
+                    EndTime = table.Column<DateTime>(nullable: false),
+                    NextTime = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_AppJobInfos", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -1096,6 +1149,11 @@ namespace MyBookStore.Migrations
                 column: "UserName");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AppAuthors_Name",
+                table: "AppAuthors",
+                column: "Name");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_IdentityServerClients_ClientId",
                 table: "IdentityServerClients",
                 column: "ClientId");
@@ -1179,7 +1237,13 @@ namespace MyBookStore.Migrations
                 name: "AbpUserTokens");
 
             migrationBuilder.DropTable(
+                name: "AppAuthors");
+
+            migrationBuilder.DropTable(
                 name: "AppBooks");
+
+            migrationBuilder.DropTable(
+                name: "AppJobInfos");
 
             migrationBuilder.DropTable(
                 name: "IdentityServerApiClaims");

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using MyBookStore.Permissions;
 using Volo.Abp.Application.Dtos;
 using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
@@ -22,6 +23,12 @@ namespace MyBookStore.Books
         public BookAppService(IRepository<Book, Guid> repository)
             : base(repository)
         {
+            //use the permissions to authorize the book management
+            GetPolicyName = MyBookStorePermissions.Books.Default;
+            GetListPolicyName = MyBookStorePermissions.Books.Default;
+            CreatePolicyName = MyBookStorePermissions.Books.Create;
+            UpdatePolicyName = MyBookStorePermissions.Books.Edit;
+            DeletePolicyName = MyBookStorePermissions.Books.Delete;
         }
     }
 }

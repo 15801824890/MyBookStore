@@ -4,6 +4,7 @@ using Localization.Resources.AbpUi;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -12,6 +13,7 @@ using MyBookStore.Localization;
 using MyBookStore.MultiTenancy;
 using MyBookStore.Web.Menus;
 using Microsoft.OpenApi.Models;
+using MyBookStore.Permissions;
 using Swashbuckle.AspNetCore.Swagger;
 using Volo.Abp;
 using Volo.Abp.Account.Web;
@@ -50,7 +52,7 @@ namespace MyBookStore.Web
         typeof(AbpAspNetCoreAuthenticationJwtBearerModule),
         typeof(AbpTenantManagementWebModule),
         typeof(AbpAspNetCoreSerilogModule)
-        )]
+    )]
     public class MyBookStoreWebModule : AbpModule
     {
         public override void PreConfigureServices(ServiceConfigurationContext context)
@@ -81,6 +83,14 @@ namespace MyBookStore.Web
             ConfigureNavigationServices();
             ConfigureAutoApiControllers();
             ConfigureSwaggerServices(context.Services);
+
+            Configure<RazorPagesOptions>(options =>
+            {
+                //unauthorized users are redirected to the login page
+                options.Conventions.AuthorizePage("/Books/Index", MyBookStorePermissions.Books.Default);
+                options.Conventions.AuthorizePage("/Books/CreateModal", MyBookStorePermissions.Books.Create);
+                options.Conventions.AuthorizePage("/Books/EditModal", MyBookStorePermissions.Books.Edit);
+            });
         }
 
         private void ConfigureUrls(IConfiguration configuration)
@@ -104,11 +114,7 @@ namespace MyBookStore.Web
 
         private void ConfigureAutoMapper()
         {
-            Configure<AbpAutoMapperOptions>(options =>
-            {
-                options.AddMaps<MyBookStoreWebModule>();
-
-            });
+            Configure<AbpAutoMapperOptions>(options => { options.AddMaps<MyBookStoreWebModule>(); });
         }
 
         private void ConfigureVirtualFileSystem(IWebHostEnvironment hostingEnvironment)
@@ -117,11 +123,20 @@ namespace MyBookStore.Web
             {
                 Configure<AbpVirtualFileSystemOptions>(options =>
                 {
-                    options.FileSets.ReplaceEmbeddedByPhysical<MyBookStoreDomainSharedModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}MyBookStore.Domain.Shared"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<MyBookStoreDomainModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}MyBookStore.Domain"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<MyBookStoreApplicationContractsModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}MyBookStore.Application.Contracts"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<MyBookStoreApplicationModule>(Path.Combine(hostingEnvironment.ContentRootPath, $"..{Path.DirectorySeparatorChar}MyBookStore.Application"));
-                    options.FileSets.ReplaceEmbeddedByPhysical<MyBookStoreWebModule>(hostingEnvironment.ContentRootPath);
+                    options.FileSets.ReplaceEmbeddedByPhysical<MyBookStoreDomainSharedModule>(
+                        Path.Combine(hostingEnvironment.ContentRootPath,
+                            $"..{Path.DirectorySeparatorChar}MyBookStore.Domain.Shared"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<MyBookStoreDomainModule>(
+                        Path.Combine(hostingEnvironment.ContentRootPath,
+                            $"..{Path.DirectorySeparatorChar}MyBookStore.Domain"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<MyBookStoreApplicationContractsModule>(
+                        Path.Combine(hostingEnvironment.ContentRootPath,
+                            $"..{Path.DirectorySeparatorChar}MyBookStore.Application.Contracts"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<MyBookStoreApplicationModule>(
+                        Path.Combine(hostingEnvironment.ContentRootPath,
+                            $"..{Path.DirectorySeparatorChar}MyBookStore.Application"));
+                    options.FileSets.ReplaceEmbeddedByPhysical<MyBookStoreWebModule>(hostingEnvironment
+                        .ContentRootPath);
                 });
             }
         }
@@ -162,7 +177,7 @@ namespace MyBookStore.Web
             services.AddSwaggerGen(
                 options =>
                 {
-                    options.SwaggerDoc("v1", new OpenApiInfo { Title = "MyBookStore API", Version = "v1" });
+                    options.SwaggerDoc("v1", new OpenApiInfo {Title = "MyBookStore API", Version = "v1"});
                     options.DocInclusionPredicate((docName, description) => true);
                     options.CustomSchemaIds(type => type.FullName);
                 }
@@ -200,10 +215,7 @@ namespace MyBookStore.Web
             app.UseIdentityServer();
             app.UseAuthorization();
             app.UseSwagger();
-            app.UseSwaggerUI(options =>
-            {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "MyBookStore API");
-            });
+            app.UseSwaggerUI(options => { options.SwaggerEndpoint("/swagger/v1/swagger.json", "MyBookStore API"); });
             app.UseAuditing();
             app.UseAbpSerilogEnrichers();
             app.UseConfiguredEndpoints();
